@@ -28,3 +28,10 @@ VALUES
 INSERT INTO Message (message_id, sender_id, recipient_id, message_body)
 VALUES
   ('msg-1', 'uuid-2', 'uuid-1', 'Thanks for hosting!');
+
+# Seed Data Script
+
+This folder contains SQL statements to populate the Airbnb clone database with sample data.
+
+- `seed.sql`: Inserts users, properties, bookings, payments, reviews, and messages.
+
