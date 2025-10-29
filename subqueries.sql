@@ -1,5 +1,5 @@
 -- Non-correlated subquery: Properties with average rating > 4.0
-SELECT id, name
+SELECT *
 FROM properties
 WHERE id IN (
     SELECT property_id
@@ -9,10 +9,10 @@ WHERE id IN (
 );
 
 -- Correlated subquery: Users with more than 3 bookings
-SELECT id, name
-FROM users
+SELECT *
+FROM users u
 WHERE (
     SELECT COUNT(*)
-    FROM bookings
-    WHERE bookings.user_id = users.id
+    FROM bookings b
+    WHERE b.user_id = u.id
 ) > 3;
