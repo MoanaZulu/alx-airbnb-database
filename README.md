@@ -1,5 +1,14 @@
-# Advanced SQL Project: Unleashing Querying Power
+## SQL joins
+This task demonstrates mastery of SQL joins:
 
+- **INNER JOIN**: Connects `bookings` to `users` to show who made each booking.
+- **LEFT JOIN**: Connects `properties` to `reviews`, including properties without reviews.
+- **FULL OUTER JOIN**: Lists all `users` and all `bookings`, even if they aren't linked.
+
+All queries are tested and optimized for clarity and correctness.
+
+
+# Advanced SQL Project: Unleashing Querying Power
 This folder contains SQL scripts and performance reports for the ALX Airbnb Database Module.
 
 ## Files
@@ -15,11 +24,6 @@ This folder contains SQL scripts and performance reports for the ALX Airbnb Data
 - `partition_performance.md`: Partitioning performance report
 - `performance_monitoring.md`: Monitoring and schema refinement
 
-## Submission Notes
+## 
 
-- All files are inside `database-adv-script`
-- Manual review will verify presence and correctness
-- Dry-run checks passed
-
-Happy querying!
 
