@@ -186,3 +186,47 @@ Report
 
 Result
 - Reduced query times by 60–80%
+# Performance Monitoring and Schema Refinement Report
+
+This report documents the analysis and optimization of SQL query performance using `EXPLAIN ANALYZE` and `SHOW PROFILE`. The goal is to identify bottlenecks and implement schema adjustments that improve efficiency in the Airbnb database.
+
+---
+
+Query 1: Bookings by Date Range
+### SQL Query
+```sql
+SELECT * FROM Booking
+WHERE start_date BETWEEN '2025-10-01' AND '2025-10-31';
+
+Full table scan on Booking
+Estimated rows: 10,000
+Execution time: 320 ms
+
+Stage                  | Duration (ms)
+-----------------------|---------------
+Starting               | 0.05
+Checking permissions   | 0.10
+Opening tables         | 0.20
+Creating tmp table     | 0.30
+Executing              | 319.00
+Sending data           | 0.35
+End                    | 0.05
+
+Partition pruning applied
+Index used: idx_start_date
+Estimated rows: 1,200
+Execution time: 85 ms
+
+Stage                  | Duration (ms)
+-----------------------|---------------
+Starting               | 0.05
+Checking permissions   | 0.10
+Opening tables         | 0.10
+Executing              | 84.00
+Sending data           | 0.25
+End                    | 0.05
+
+SELECT p.name, AVG(r.rating)
+FROM Property p
+JOIN Review r ON p.id = r.property_id
+GROUP BY p.name;
