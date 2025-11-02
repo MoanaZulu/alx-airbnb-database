@@ -1,4 +1,9 @@
 ## joins_queries.sql
+DESCRIBE properties;
+DESCRIBE reviews;
+DESCRIBE users;
+DESCRIBE bookings;
+
 
 -- 1. INNER JOIN: Retrieve all bookings and the respective users who made those bookings
 SELECT
