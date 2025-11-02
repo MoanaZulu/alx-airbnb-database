@@ -1,23 +1,35 @@
-## Joins_queries.sql
+-- 1. INNER JOIN: Retrieve all bookings and the respective users who made those bookings
+SELECT
+    bookings.id AS booking_id,
+    bookings.start_date,
+    bookings.end_date,
+    users.id AS user_id,
+    users.name AS user_name,
+    users.email
+FROM bookings
+INNER JOIN users ON bookings.user_id = users.id;
 
-SELECT b.id AS booking_id, u.name AS user_name
-FROM bookings b
-INNER JOIN users u ON b.user_id = u.id;
+-- 2. LEFT JOIN: Retrieve all properties and their reviews, including properties that have no reviews
+SELECT
+    properties.id AS property_id,
+    properties.name AS property_name,
+    reviews.id AS review_id,
+    reviews.rating,
+    reviews.comment
+FROM properties
+LEFT JOIN reviews ON properties.id = reviews.property_id;
 
--- INNER JOIN: Retrieve all bookings and the respective users who made those bookings
-SELECT b.*, u.*
-FROM bookings b
-INNER JOIN users u ON b.user_id = u.id;
+-- 3. FULL OUTER JOIN: Retrieve all users and all bookings, even if the user has no booking or a booking is not linked to a user
+SELECT
+    users.id AS user_id,
+    users.name AS user_name,
+    bookings.id AS booking_id,
+    bookings.start_date,
+    bookings.end_date
+FROM users
+FULL OUTER JOIN bookings ON users.id = bookings.user_id;
 
--- LEFT JOIN: Retrieve all properties and their reviews, including properties with no reviews
-SELECT p.*, r.*
-FROM properties p
-LEFT JOIN reviews r ON p.id = r.property_id;
 
--- FULL OUTER JOIN: Retrieve all users and all bookings, even if unmatched
-SELECT u.*, b.*
-FROM users u
-FULL OUTER JOIN bookings b ON u.id = b.user_id;
 
 ## Subqueries.sql
 
@@ -41,6 +53,8 @@ WHERE (
 ) > 3;
 
 
+
+
 ## Aggregations_and_window_fuctions.sql
 
 -- Aggregation: Total bookings per user
@@ -54,12 +68,18 @@ SELECT property_id, COUNT(*) AS total_bookings,
 FROM bookings
 GROUP BY property_id;
 
+
+
+
 ## Database_index.sql
 
 -- Indexes for optimization
 CREATE INDEX idx_user_id ON bookings(user_id);
 CREATE INDEX idx_property_id ON reviews(property_id);
 CREATE INDEX idx_start_date ON bookings(start_date);
+
+
+
 
 ## Index_performance.md
 
@@ -75,6 +95,9 @@ After Indexing
 Summary
 Indexing significantly improved query performance on high-usage columns.
 
+
+
+
 ## Performance.sql
 
 -- Initial complex query: Bookings with user, property, and payment details
@@ -83,6 +106,8 @@ FROM bookings b
 JOIN users u ON b.user_id = u.id
 JOIN properties p ON b.property_id = p.id
 JOIN payments pay ON b.payment_id = pay.id;
+
+
 
 ## Optimization_report.md
 
@@ -99,6 +124,8 @@ Refactored Query
 Conclusion
 Refactoring and indexing reduced execution time by over 75%.
 
+
+
 ## Partitioning.sql
 
 -- Partitioning Booking table by start_date (example using PostgreSQL)
@@ -114,6 +141,8 @@ CREATE TABLE bookings_partitioned (
 CREATE TABLE bookings_2025 PARTITION OF bookings_partitioned
 FOR VALUES FROM ('2025-01-01') TO ('2026-01-01');
 
+
+
 ## Partition_performance.md
 
 Report
@@ -125,6 +154,8 @@ After Partitioning
 
 Summary
 Partitioning improved performance for date-based queries.
+
+
 
 ## Performance_monitoring.md
 
