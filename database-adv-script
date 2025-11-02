@@ -4,6 +4,10 @@ DESCRIBE reviews;
 DESCRIBE users;
 DESCRIBE bookings;
 
+SELECT COUNT(*) FROM reviews WHERE rating IS NULL;
+SELECT COUNT(*) FROM bookings WHERE user_id IS NULL;
+
+
 
 -- 1. INNER JOIN: Retrieve all bookings and the respective users who made those bookings
 SELECT
