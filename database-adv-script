@@ -1,3 +1,5 @@
+## joins_queries.sql
+
 -- 1. INNER JOIN: Retrieve all bookings and the respective users who made those bookings
 SELECT
     bookings.id AS booking_id,
