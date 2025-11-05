@@ -1,34 +1,14 @@
--- INNER JOIN: Bookings and their respective users
-SELECT
-    bookings.id AS booking_id,
-    bookings.start_date,
-    bookings.end_date,
-    users.id AS user_id,
-    users.name AS user_name,
-    users.email
-FROM bookings
-INNER JOIN users ON bookings.user_id = users.id;
+-- INNER JOIN: Bookings and Users
+SELECT b.id AS booking_id, b.start_date, b.end_date, u.id AS user_id, u.name
+FROM Booking b
+INNER JOIN User u ON b.user_id = u.id;
 
--- LEFT JOIN: Properties and their reviews (including properties with no reviews)
-SELECT
-    properties.id AS property_id,
-    properties.title,
-    reviews.id AS review_id,
-    reviews.rating,
-    reviews.comment
-FROM properties
-LEFT JOIN reviews ON properties.id = reviews.property_id;
+-- LEFT JOIN: Properties and Reviews
+SELECT p.id AS property_id, p.name AS property_name, r.id AS review_id, r.rating, r.comment
+FROM Property p
+LEFT JOIN Review r ON p.id = r.property_id;
 
--- FULL OUTER JOIN: All users and all bookings (even unmatched ones)
-SELECT
-    users.id AS user_id,
-    users.name AS user_name,
-    bookings.id AS booking_id,
-    bookings.start_date,
-    bookings.end_date
-FROM users
-FULL OUTER JOIN bookings ON users.id = bookings.user_id;
-
-SELECT b.id AS booking_id, u.name AS user_name
-FROM bookings b
-INNER JOIN users u ON b.user_id = u.id;
+-- FULL OUTER JOIN: Users and Bookings
+SELECT u.id AS user_id, u.name, b.id AS booking_id, b.start_date, b.end_date
+FROM User u
+FULL OUTER JOIN Booking b ON u.id = b.user_id;
