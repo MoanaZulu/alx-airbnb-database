@@ -1,14 +1,14 @@
 -- INNER JOIN: Bookings and Users
-SELECT b.id AS booking_id, b.start_date, b.end_date, u.id AS user_id, u.name
-FROM Booking b
-INNER JOIN User u ON b.user_id = u.id;
+SELECT Booking.id AS booking_id, Booking.start_date, Booking.end_date, User.id AS user_id, User.name
+FROM Booking
+INNER JOIN User ON Booking.user_id = User.id;
 
 -- LEFT JOIN: Properties and Reviews
-SELECT p.id AS property_id, p.name AS property_name, r.id AS review_id, r.rating, r.comment
-FROM Property p
-LEFT JOIN Review r ON p.id = r.property_id;
+SELECT Property.id AS property_id, Property.name AS property_name, Review.id AS review_id, Review.rating, Review.comment
+FROM Property
+LEFT JOIN Review ON Property.id = Review.property_id;
 
 -- FULL OUTER JOIN: Users and Bookings
-SELECT u.id AS user_id, u.name, b.id AS booking_id, b.start_date, b.end_date
-FROM User u
-FULL OUTER JOIN Booking b ON u.id = b.user_id;
+SELECT User.id AS user_id, User.name, Booking.id AS booking_id, Booking.start_date, Booking.end_date
+FROM User
+FULL OUTER JOIN Booking ON User.id = Booking.user_id;
