@@ -12,4 +12,4 @@ FROM (
     FROM properties p
     JOIN bookings b ON p.id = b.property_id
     GROUP BY p.id, p.name
-) AS ranked_properties;
+ AS property_bookings;
