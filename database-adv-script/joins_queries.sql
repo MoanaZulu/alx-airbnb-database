@@ -4,9 +4,16 @@ FROM Booking b
 INNER JOIN User u ON b.user_id = u.id;
 
 -- LEFT JOIN: Properties and Reviews
-SELECT p.id AS property_id, p.name AS property_name, r.id AS review_id, r.rating, r.comment
+SELECT
+    p.id AS property_id,
+    p.name AS property_name,
+    r.id AS review_id,
+    r.rating,
+    r.comment
 FROM Property p
-LEFT JOIN Review r ON p.id = r.property_id;
+LEFT JOIN Review r ON p.id = r.property_id
+ORDER BY p.id;
+
 
 -- FULL OUTER JOIN: Users and Bookings
 SELECT u.id AS user_id, u.name, b.id AS booking_id, b.start_date, b.end_date
