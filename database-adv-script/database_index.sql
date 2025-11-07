@@ -1,11 +1,12 @@
--- Index on Booking.user_id for JOINs and WHERE filters
-CREATE INDEX idx_booking_user_id ON Booking(user_id);
+-- Before indexing
+EXPLAIN ANALYZE
+SELECT * FROM bookings WHERE status = 'confirmed';
 
--- Index on Booking.property_id for JOINs
-CREATE INDEX idx_booking_property_id ON Booking(property_id);
+-- Create indexes
+CREATE INDEX idx_bookings_status ON bookings(status);
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_properties_location ON properties(location);
 
--- Index on Property.name for ORDER BY or search
-CREATE INDEX idx_property_name ON Property(name);
-
--- Index on User.name for search or sorting
-CREATE INDEX idx_user_name ON User(name);
+-- After indexing
+EXPLAIN ANALYZE
+SELECT * FROM bookings WHERE status = 'confirmed';
