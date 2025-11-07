@@ -1,5 +1,5 @@
--- Initial query: Retrieve all bookings with user, property, and payment details
-SELECT
+-- Analyze performance of a complex query retrieving bookings with user, property, and payment details
+EXPLAIN SELECT
     b.id AS booking_id,
     b.start_date,
     b.end_date,
@@ -13,5 +13,5 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.id
 JOIN properties p ON b.property_id = p.id
-JOIN payments pay ON b.payment_id = pay.id;
-
+JOIN payments pay ON b.payment_id = pay.id
+WHERE b.status = 'confirmed' AND pay.status = 'completed';
